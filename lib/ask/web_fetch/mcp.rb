@@ -37,6 +37,7 @@ module Ask
       def self.start
         Ask::MCP::Server.start_stdio(
           name: 'ask-web-fetch-mcp',
+          version: VERSION,
           tools: [tool],
           capabilities: { tools: {} },
           debug: ENV['DEBUG'] == '1'

@@ -30,7 +30,11 @@ Gem::Specification.new do |spec|
   spec.executables = ['ask-web-fetch-mcp']
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'ask-mcp', '>= 0.1'
+  # ask-mcp >= 0.4.3: the 0.4 line adds the stateless 2026-07-28 protocol
+  # (server/discover negotiation, per-request _meta, MRTR); 0.4.3 adds the
+  # serverInfo version passthrough so this server can advertise its own gem
+  # version.
+  spec.add_dependency 'ask-mcp', '>= 0.4.3'
   spec.add_dependency 'ask-web-fetch', '>= 0.2'
 
   spec.add_development_dependency 'minitest', '~> 5.25'
