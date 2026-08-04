@@ -1,0 +1,39 @@
+# frozen_string_literal: true
+
+require_relative 'lib/ask/web_fetch/mcp/version'
+
+Gem::Specification.new do |spec|
+  spec.name = 'ask-web-fetch-mcp'
+  spec.version = Ask::WebFetch::MCP::VERSION
+  spec.authors = ['Kaka Ruto']
+  spec.email = ['kaka@myrrlabs.com']
+
+  spec.summary = 'MCP server for web fetch'
+  spec.description = <<~DESC
+    A minimal MCP (Model Context Protocol) server that exposes Ask::Tools::WebFetch
+    as a callable tool over stdio. Designed for use with clients that support MCP
+    (ZCode, Claude Code, etc.), it fetches a URL and returns clean markdown via the
+    local pure-Ruby backend, with an automatic Jina Reader fallback.
+  DESC
+
+  spec.homepage = 'https://github.com/ask-rb/ask-web-fetch-mcp'
+  spec.license = 'MIT'
+  spec.required_ruby_version = '>= 3.2'
+
+  spec.metadata['homepage_uri'] = spec.homepage
+  spec.metadata['source_code_uri'] = spec.homepage
+  spec.metadata['changelog_uri'] = "#{spec.homepage}/blob/master/CHANGELOG.md"
+  spec.metadata['rubygems_mfa_required'] = 'true'
+
+  spec.files = Dir['lib/**/*', 'LICENSE', 'README.md', 'CHANGELOG.md']
+  spec.bindir = 'bin'
+  spec.executables = ['ask-web-fetch-mcp']
+  spec.require_paths = ['lib']
+
+  spec.add_dependency 'ask-mcp', '>= 0.1'
+  spec.add_dependency 'ask-web-fetch', '>= 0.2'
+
+  spec.add_development_dependency 'minitest', '~> 5.25'
+  spec.add_development_dependency 'rake', '~> 13.0'
+  spec.add_development_dependency 'webmock', '~> 3.26'
+end
