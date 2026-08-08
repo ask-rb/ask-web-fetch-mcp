@@ -35,7 +35,10 @@ Gem::Specification.new do |spec|
   # serverInfo version passthrough so this server can advertise its own gem
   # version.
   spec.add_dependency 'ask-mcp', '>= 0.4.3'
-  spec.add_dependency 'ask-web-fetch', '>= 0.2'
+  # 0.4 brings the content-pruning pipeline and the Browser backend
+  # (launched Chrome plus the ASK_WEB_FETCH_CDP_URL attached mode), which
+  # this server exposes unchanged.
+  spec.add_dependency 'ask-web-fetch', '>= 0.4'
 
   spec.add_development_dependency 'minitest', '~> 5.25'
   spec.add_development_dependency 'rake', '~> 13.0'

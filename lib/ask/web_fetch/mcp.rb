@@ -23,14 +23,17 @@ module Ask
       #
       # The server listens for JSON-RPC messages on stdin and writes
       # responses to stdout — the standard MCP stdio transport. Register
-      # this executable as an MCP server in your client configuration:
+      # this executable as an MCP server in your client configuration,
+      # setting ASK_WEB_FETCH_CDP_URL in the server's env to route
+      # Cloudflare-gated pages through an already-running Chrome:
       #
       #   "mcp": {
       #     "servers": {
       #       "ask-web-fetch-mcp": {
       #         "type": "stdio",
       #         "command": "ask-web-fetch-mcp",
-      #         "args": []
+      #         "args": [],
+      #         "env": { "ASK_WEB_FETCH_CDP_URL": "http://127.0.0.1:9222" }
       #       }
       #     }
       #   }

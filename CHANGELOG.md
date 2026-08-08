@@ -1,3 +1,14 @@
+## [0.3.0] — 2026-08-08
+
+### Changed
+
+- `ask-web-fetch` floor raised to `>= 0.4` for the content-pruning pipeline
+  and the Browser backend. The server exposes the tool unchanged; set
+  `ASK_WEB_FETCH_CDP_URL` (e.g. `http://127.0.0.1:9222`) in the server's
+  environment to fetch Cloudflare-gated pages through an already-running
+  Chrome, and `ASK_WEB_FETCH_CHROME_PATH`/`ASK_WEB_FETCH_PROFILE` to tune
+  the launched-browser mode.
+
 ## [0.2.0] — 2026-08-04
 
 ### Added
