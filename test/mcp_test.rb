@@ -23,17 +23,24 @@ describe Ask::WebFetch::MCP do
   describe 'tool call' do
     before do
       WebMock.disable_net_connect!
+      @original_local_http = Ask::WebFetch::Backends::Local.http
+      @local_http = StubHttp.new { raise 'unexpected local request' }
+      Ask::WebFetch::Backends::Local.http = @local_http
     end
 
     after do
+      Ask::WebFetch::Backends::Local.http = @original_local_http
       WebMock.reset!
+    end
+
+    def stub_local(&handler)
+      @local_http.handler = handler
     end
 
     it 'returns clean markdown for a fetched page' do
       body = '<html><head><title>MCP Page</title></head><body><article>' \
              "<p>#{'Content served through the MCP server. ' * 6}</p></article></body></html>"
-      stub_request(:get, 'https://example.com')
-        .to_return(status: 200, headers: { 'Content-Type' => 'text/html' }, body: body)
+      stub_local { |_, _| http_response(200, body) }
 
       result = Ask::WebFetch::MCP.tool.call('url' => 'https://example.com')
 
@@ -44,9 +51,7 @@ describe Ask::WebFetch::MCP do
     end
 
     it 'falls back to the jina backend when local finds no content' do
-      stub_request(:get, 'https://example.com')
-        .to_return(status: 200, headers: { 'Content-Type' => 'text/html' },
-                   body: '<html><body><div id="app"><script>render()</script></div></body></html>')
+      stub_local { |_, _| http_response(200, '<html><body><div id="app"><script>render()</script></div></body></html>') }
       stub_request(:get, 'https://r.jina.ai/https://example.com')
         .to_return(status: 200, body: 'Jina rendered content for the MCP server. ' * 5)
 

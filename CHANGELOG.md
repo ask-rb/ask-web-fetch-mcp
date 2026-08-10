@@ -1,3 +1,13 @@
+## [0.4.0] — 2026-08-10
+
+### Changed
+
+- `ask-web-fetch` floor raised to `>= 0.5` for the pooled httpx transport
+  (keep-alive connections reused across tool calls in a long-lived server
+  process) and raw outlinks + license signals on every backend's page
+  result. The server exposes the tool unchanged; `ask_web_fetch` calls
+  answer faster after the first one per host.
+
 ## [0.3.0] — 2026-08-08
 
 ### Changed
