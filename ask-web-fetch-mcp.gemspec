@@ -35,11 +35,11 @@ Gem::Specification.new do |spec|
   # serverInfo version passthrough so this server can advertise its own gem
   # version.
   spec.add_dependency 'ask-mcp', '>= 0.4.3'
-  # 0.5 brings the pooled httpx transport (keep-alive connections reused
-  # across tool calls in a long-lived server process) and raw outlinks +
-  # license signals on every backend's page result, which this server
-  # exposes unchanged.
-  spec.add_dependency 'ask-web-fetch', '>= 0.5'
+  # 0.5.1 brings the NoiseFilter — decorative symbol streams (animated
+  # page backgrounds, dividers) are stripped from every backend's
+  # markdown, and Jina/Crawl4AI now run the same Markdown.clean as the
+  # converting backends.
+  spec.add_dependency 'ask-web-fetch', '>= 0.5.1'
 
   spec.add_development_dependency 'minitest', '~> 5.25'
   spec.add_development_dependency 'rake', '~> 13.0'

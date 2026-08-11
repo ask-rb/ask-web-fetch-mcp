@@ -1,3 +1,14 @@
+## [0.4.1] — 2026-08-11
+
+### Changed
+
+- `ask-web-fetch` floor raised to `>= 0.5.1` for the NoiseFilter:
+  decorative symbol streams (animated page backgrounds, dividers) are
+  stripped from every backend's markdown, and Jina/Crawl4AI now run the
+  same `Markdown.clean` as the converting backends. The server exposes
+  the tool unchanged; `ask_web_fetch` output is free of symbol-stream
+  noise on all backends.
+
 ## [0.4.0] — 2026-08-10
 
 ### Changed
