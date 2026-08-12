@@ -2,19 +2,20 @@
 
 require 'ask/mcp'
 require 'ask/web_fetch'
+require_relative 'mcp/tool'
 require_relative 'mcp/version'
 
 module Ask
   module WebFetch
     # MCP (Model Context Protocol) server for ask-web-fetch.
     module MCP
-      # Builds the tool exposed over MCP: Ask::Tools::WebFetch renamed to
-      # "ask_web_fetch" to avoid collisions with client-side tools of the
-      # same name (ask-web-search-mcp follows the same convention).
+      # Builds the tool exposed over MCP. The tool framing lives here —
+      # ask-web-fetch is a library (Ask::WebFetch.fetch); this server
+      # owns the agent-facing shell, named "ask_web_fetch" to avoid
+      # collisions with client-side tools of the same name
+      # (ask-web-search-mcp follows the same convention).
       def self.tool
-        tool = Ask::Tools::WebFetch.new
-        tool.define_singleton_method(:name) { 'ask_web_fetch' }
-        tool
+        Tool.new
       end
 
       # Start the MCP server over stdio, exposing the ask_web_fetch tool.

@@ -10,14 +10,15 @@ Gem::Specification.new do |spec|
 
   spec.summary = 'MCP server for web fetch'
   spec.description = <<~DESC
-    A minimal MCP (Model Context Protocol) server that exposes Ask::Tools::WebFetch
+    A minimal MCP (Model Context Protocol) server that exposes ask_web_fetch
     as a callable tool over stdio. Designed for use with clients that support MCP
     (ZCode, Claude Code, etc.), it fetches a URL and returns clean markdown through
     the ask-web-fetch backend chain — fast pure-Ruby httpx fetch first, a real
     Chrome (launched or CDP-attached) for JS-rendered and challenge-gated pages,
     with Jina Reader and self-hosted Crawl4AI in between. Terminal failures
     (parked domains, empty pages, dead 4xx) surface as their deterministic error
-    class, so clients never retry the unretryable.
+    class, so clients never retry the unretryable. The tool shell (name, schema,
+    call) lives here, wrapping the Ask::WebFetch library.
   DESC
 
   spec.homepage = 'https://github.com/ask-rb/ask-web-fetch-mcp'
@@ -39,15 +40,14 @@ Gem::Specification.new do |spec|
   # serverInfo version passthrough so this server can advertise its own gem
   # version.
   spec.add_dependency 'ask-mcp', '>= 0.4.3'
-  # 0.6.0 brings the failure collapse: when every backend fails, the tool
-  # raises the most definitive class (ParkedDomainError > EmptyContentError
-  # > deterministic FetchError; transient stays on the base Error), so the
-  # ask_web_fetch tool can tell a terminal verdict from a retryable one.
-  # 0.6.1 extends the parked-domain detector to Jina and Crawl4AI — a
-  # registrar ad is rejected on every backend, never returned as content.
-  # It also carries the JS-shell completeness signal, warm-and-retry
-  # challenge handling, and the network-idle wait.
-  spec.add_dependency 'ask-web-fetch', '>= 0.6.1'
+  # 0.7.1: the module-level library API (Ask::WebFetch.fetch with the
+  # failure collapse — ParkedDomainError > EmptyContentError > deterministic
+  # FetchError, transient stays retryable — the parked-domain detector on
+  # every backend, JS-shell completeness signal, warm-and-retry, and the
+  # network-idle wait). This server owns the ask_web_fetch tool shell
+  # (duck-typed for the MCP adapter); the library's native Ask::Tools
+  # tool, when wanted, is an optional integration in ask-web-fetch itself.
+  spec.add_dependency 'ask-web-fetch', '>= 0.7.1'
 
   spec.add_development_dependency 'minitest', '~> 5.25'
   spec.add_development_dependency 'rake', '~> 13.0'

@@ -7,7 +7,7 @@ describe Ask::WebFetch::MCP do
     tool = Ask::WebFetch::MCP.tool
 
     _(tool.name).must_equal 'ask_web_fetch'
-    _(tool).must_be_kind_of Ask::Tools::WebFetch
+    _(tool).must_be_kind_of Ask::WebFetch::MCP::Tool
   end
 
   it 'satisfies the duck-typed MCP tool contract' do
@@ -49,10 +49,9 @@ describe Ask::WebFetch::MCP do
 
       result = Ask::WebFetch::MCP.tool.call('url' => 'https://example.com')
 
-      _(result).must_be_kind_of Ask::Result
-      _(result.ok?).must_equal true
-      _(result.output).must_include '# MCP Page'
-      _(result.output).must_include 'Source: https://example.com'
+      _(result).must_be_kind_of String
+      _(result).must_include '# MCP Page'
+      _(result).must_include 'Source: https://example.com'
     end
 
     it 'falls back to the jina backend when local finds no content' do
@@ -62,8 +61,12 @@ describe Ask::WebFetch::MCP do
 
       result = Ask::WebFetch::MCP.tool.call('url' => 'https://example.com')
 
-      _(result.ok?).must_equal true
-      _(result.output).must_include 'Jina rendered content'
+      _(result).must_be_kind_of String
+      _(result).must_include 'Jina rendered content'
+    end
+
+    it 'rejects a call without a url' do
+      _(-> { Ask::WebFetch::MCP.tool.call({}) }).must_raise ArgumentError
     end
 
     it 'surfaces a terminal verdict as its error class (parked domain)' do
@@ -75,11 +78,11 @@ describe Ask::WebFetch::MCP do
       end
       stub_request(:get, 'https://r.jina.ai/https://example.com').to_return(status: 404, body: 'nope')
 
-      result = Ask::WebFetch::MCP.tool.call('url' => 'https://example.com')
+      error = assert_raises(Ask::WebFetch::ParkedDomainError) do
+        Ask::WebFetch::MCP.tool.call('url' => 'https://example.com')
+      end
 
-      _(result.ok?).must_equal false
-      _(result.error_message).must_match(/Ask::WebFetch::ParkedDomainError/)
-      _(result.error_message).must_match(/parked domain/)
+      _(error.message).must_match(/parked domain/)
     end
   end
 end

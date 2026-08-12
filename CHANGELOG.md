@@ -1,3 +1,27 @@
+## [0.6.0] — 2026-08-12
+
+### Changed
+
+- **The server owns its tool shell.** `ask_web_fetch` is now a
+  duck-typed tool (`Ask::WebFetch::MCP::Tool` — `name` /
+  `description` / `params_schema` / `call`) wrapping the library entry
+  `Ask::WebFetch.fetch`, instead of a renamed `Ask::Tools::WebFetch`.
+  The MCP adapter's contract is duck-typed by design, so the server
+  gains nothing from the ask-tools machinery — and the ask-tools /
+  ask-core / ask-schema dependency chain is gone from the server
+  process entirely. `ask-web-fetch` floor raised to `>= 0.7.1` (the
+  module-level API with the failure collapse and parked-domain
+  detection on every backend).
+- **Cleaner error framing.** A failed call now surfaces as
+  `Error: Ask::WebFetch::ParkedDomainError: ...` — the class is still
+  named, without the tool layer's double wrap. Terminal verdicts
+  (parked, empty, dead 4xx) are never retried by clients; transient
+  failures raise the base `Error`.
+- **The native agent tool stays available for non-MCP consumers.**
+  `Ask::Tools::WebFetch` lives in ask-web-fetch as an optional
+  integration (registered when ask-tools is present) for agent
+  frameworks that resolve tools by name.
+
 ## [0.5.0] — 2026-08-12
 
 ### Changed

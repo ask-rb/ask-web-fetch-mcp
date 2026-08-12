@@ -15,5 +15,5 @@ class StubFetchBackend < Ask::WebFetch::Backend
   end
 end
 
-Ask::Tools::WebFetch.backends = [StubFetchBackend]
+Ask::WebFetch.backends = [StubFetchBackend]
 Ask::WebFetch::MCP.start
