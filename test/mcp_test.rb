@@ -26,10 +26,15 @@ describe Ask::WebFetch::MCP do
       @original_local_http = Ask::WebFetch::Backends::Local.http
       @local_http = StubHttp.new { raise 'unexpected local request' }
       Ask::WebFetch::Backends::Local.http = @local_http
+      # Test env has no Chrome to attach to — keep the real Browser
+      # backend (launch/attach over the network) out of the chain.
+      @original_browser_path = Ask::WebFetch::Backends::Browser.path
+      Ask::WebFetch::Backends::Browser.path = ''
     end
 
     after do
       Ask::WebFetch::Backends::Local.http = @original_local_http
+      Ask::WebFetch::Backends::Browser.path = @original_browser_path
       WebMock.reset!
     end
 
@@ -59,6 +64,22 @@ describe Ask::WebFetch::MCP do
 
       _(result.ok?).must_equal true
       _(result.output).must_include 'Jina rendered content'
+    end
+
+    it 'surfaces a terminal verdict as its error class (parked domain)' do
+      # Local rejects the registrar ad with ParkedDomainError; Jina finds
+      # the URL dead. The collapse keeps the most definitive verdict, so
+      # the client sees ParkedDomainError — never retry this one.
+      stub_local do |_, _|
+        http_response(200, '<html><body>example.com is parked free, courtesy of GoDaddy.com</body></html>')
+      end
+      stub_request(:get, 'https://r.jina.ai/https://example.com').to_return(status: 404, body: 'nope')
+
+      result = Ask::WebFetch::MCP.tool.call('url' => 'https://example.com')
+
+      _(result.ok?).must_equal false
+      _(result.error_message).must_match(/Ask::WebFetch::ParkedDomainError/)
+      _(result.error_message).must_match(/parked domain/)
     end
   end
 end

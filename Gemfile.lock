@@ -1,25 +1,25 @@
 PATH
   remote: .
   specs:
-    ask-web-fetch-mcp (0.4.1)
+    ask-web-fetch-mcp (0.5.0)
       ask-mcp (>= 0.4.3)
-      ask-web-fetch (>= 0.5.1)
+      ask-web-fetch (>= 0.6.1)
 
 GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
-    ask-core (0.9.0)
-    ask-mcp (0.4.3)
+    ask-core (0.11.2)
+    ask-mcp (0.4.4)
       base64
       httpx (~> 1.4)
       json-schema (~> 5.0)
     ask-schema (0.1.1)
-    ask-tools (0.5.0)
+    ask-tools (0.6.0)
       ask-core (>= 0.9.0)
       ask-schema (>= 0.1)
-    ask-web-fetch (0.5.1)
+    ask-web-fetch (0.6.1)
       ask-tools (>= 0.1)
       ferrum (>= 0.14)
       httpx (>= 1.0)
@@ -94,12 +94,12 @@ DEPENDENCIES
 
 CHECKSUMS
   addressable (2.9.0) sha256=7fdf6ac3660f7f4e867a0838be3f6cf722ace541dd97767fa42bc6cfa980c7af
-  ask-core (0.9.0) sha256=dfdb2151abc0daec9bf4079570467feece9b706bc42af05669a54a931fc7256d
-  ask-mcp (0.4.3) sha256=2081937f47496383bd7de50c31e13271a4766d3c4265448d03fe4c81d927e316
+  ask-core (0.11.2) sha256=8257539e05c7b50ff87f77b01012f75575c65cc183d1ea69d8dca14f87d6890e
+  ask-mcp (0.4.4) sha256=95f768f544402c8a0237754f02198c22b26b2de276795f8dcee332bdb406c570
   ask-schema (0.1.1) sha256=1be1c107c2f7cdacde9cf8d4dfc004e586f652c2b979e1829fab748f66ca98bd
-  ask-tools (0.5.0) sha256=74af0eacee119e526a725360686142282ddde9c540077a0f1efe31ebae2c2066
-  ask-web-fetch (0.5.1) sha256=07fd247b58625d6f3ce4f11063e25f34ced119c16fd543cdbacd79ab9f38c7a1
-  ask-web-fetch-mcp (0.4.1)
+  ask-tools (0.6.0) sha256=26a4c25a2367f49d7541b29ffc65d4efaaacec0133ea502c5aa3092f86d0966e
+  ask-web-fetch (0.6.1) sha256=5778e4e8ade7cc011e26d37ee5030f488eece297d500ba2412f9e9cfcb7c6b90
+  ask-web-fetch-mcp (0.5.0)
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
   bigdecimal (4.1.2) sha256=53d217666027eab4280346fba98e7d5b66baaae1b9c3c1c0ffe89d48188a3fbd
   bundler (4.0.12) sha256=7f8b757d28dfb636e7b24fba2344ac6dd13b5b24f4b46d62573d483f211825ac

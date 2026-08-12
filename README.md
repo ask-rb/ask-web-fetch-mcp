@@ -5,9 +5,10 @@
 A minimal MCP (Model Context Protocol) server that exposes
 `Ask::Tools::WebFetch` as a callable tool over stdio. Designed for use with
 clients that support MCP (ZCode, Claude Code, etc.), it fetches a URL and
-returns clean markdown for LLM consumption — via the local pure-Ruby backend
-by default, with an automatic Jina Reader fallback for JS-rendered or blocked
-pages.
+returns clean markdown for LLM consumption — through the full ask-web-fetch
+backend chain: the fast pure-Ruby httpx fetch first, Jina Reader and
+self-hosted Crawl4AI in between, and a real Chrome (launched, or attached
+over CDP) last for JS-rendered and challenge-gated pages.
 
 ## Installation
 
@@ -56,8 +57,22 @@ collisions with client-side tools of the same name, matching
 The `ask-web-fetch` backend chain applies unchanged. Optional environment
 variables:
 
+- `ASK_WEB_FETCH_CDP_URL` — CDP endpoint of an already-running Chrome
+  (e.g. `http://127.0.0.1:9222`); routes challenge-gated pages through a
+  trusted browser that has already solved them
+- `ASK_WEB_FETCH_CHROME_PATH` / `ASK_WEB_FETCH_PROFILE` — tune the
+  launched-browser mode (binary path, persistent profile for solved
+  cookies)
+- `CRAWL4AI_URL` / `CRAWL4AI_TOKEN` — lead the chain with a self-hosted
+  Crawl4AI renderer (`http://localhost:11235` when unset)
 - `JINA_API_KEY` — enables the Jina fallback with higher rate limits
 - `DEBUG=1` — ask-mcp debug logging on stderr
+
+When every backend fails, the error names the verdict class: terminal
+outcomes — a parked domain (`ParkedDomainError`), a page with no usable
+content (`EmptyContentError`), a dead URL (`FetchError`) — are never
+retryable; transient failures (timeouts, 5xx) raise the base
+`Ask::WebFetch::Error`.
 
 ## Full documentation
 

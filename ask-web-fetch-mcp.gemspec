@@ -12,8 +12,12 @@ Gem::Specification.new do |spec|
   spec.description = <<~DESC
     A minimal MCP (Model Context Protocol) server that exposes Ask::Tools::WebFetch
     as a callable tool over stdio. Designed for use with clients that support MCP
-    (ZCode, Claude Code, etc.), it fetches a URL and returns clean markdown via the
-    local pure-Ruby backend, with an automatic Jina Reader fallback.
+    (ZCode, Claude Code, etc.), it fetches a URL and returns clean markdown through
+    the ask-web-fetch backend chain — fast pure-Ruby httpx fetch first, a real
+    Chrome (launched or CDP-attached) for JS-rendered and challenge-gated pages,
+    with Jina Reader and self-hosted Crawl4AI in between. Terminal failures
+    (parked domains, empty pages, dead 4xx) surface as their deterministic error
+    class, so clients never retry the unretryable.
   DESC
 
   spec.homepage = 'https://github.com/ask-rb/ask-web-fetch-mcp'
@@ -35,11 +39,15 @@ Gem::Specification.new do |spec|
   # serverInfo version passthrough so this server can advertise its own gem
   # version.
   spec.add_dependency 'ask-mcp', '>= 0.4.3'
-  # 0.5.1 brings the NoiseFilter — decorative symbol streams (animated
-  # page backgrounds, dividers) are stripped from every backend's
-  # markdown, and Jina/Crawl4AI now run the same Markdown.clean as the
-  # converting backends.
-  spec.add_dependency 'ask-web-fetch', '>= 0.5.1'
+  # 0.6.0 brings the failure collapse: when every backend fails, the tool
+  # raises the most definitive class (ParkedDomainError > EmptyContentError
+  # > deterministic FetchError; transient stays on the base Error), so the
+  # ask_web_fetch tool can tell a terminal verdict from a retryable one.
+  # 0.6.1 extends the parked-domain detector to Jina and Crawl4AI — a
+  # registrar ad is rejected on every backend, never returned as content.
+  # It also carries the JS-shell completeness signal, warm-and-retry
+  # challenge handling, and the network-idle wait.
+  spec.add_dependency 'ask-web-fetch', '>= 0.6.1'
 
   spec.add_development_dependency 'minitest', '~> 5.25'
   spec.add_development_dependency 'rake', '~> 13.0'

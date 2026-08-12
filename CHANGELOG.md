@@ -1,3 +1,23 @@
+## [0.5.0] — 2026-08-12
+
+### Changed
+
+- `ask-web-fetch` floor raised to `>= 0.6.1`. The server exposes the tool
+  unchanged, but `ask_web_fetch` now answers with the full current stack:
+  the pooled-httpx transport (no more hangs on multi-host crawls), real
+  network-idle waits in CDP-attached mode, JS-app-shell detection that
+  fails client-rendered pages through to a rendering backend, parked-domain
+  detection on every backend (GoDaddy/Namecheap registrar ads are rejected,
+  never returned as content), and warm-and-retry challenge handling.
+- **Failure verdicts are now classed.** When every backend fails, the tool
+  raises the most definitive class — `ParkedDomainError` beats
+  `EmptyContentError` beats a deterministic `FetchError` (every backend
+  failed dead), and any transient failure in the mix keeps the retryable
+  base `Error`. A client calling `ask_web_fetch` on a parked domain gets
+  an error naming `ParkedDomainError` instead of a generic failure, so it
+  stops retrying the unretryable. The message still lists every backend
+  and what it said.
+
 ## [0.4.1] — 2026-08-11
 
 ### Changed
