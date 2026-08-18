@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
   # (server/discover negotiation, per-request _meta, MRTR); 0.4.3 adds the
   # serverInfo version passthrough so this server can advertise its own gem
   # version.
-  spec.add_dependency 'ask-mcp', '>= 0.4.5'
+  spec.add_dependency 'ask-mcp', '>= 0.4.6'
   # 0.7.1: the module-level library API (Ask::WebFetch.fetch with the
   # failure collapse — ParkedDomainError > EmptyContentError > deterministic
   # FetchError, transient stays retryable — the parked-domain detector on
