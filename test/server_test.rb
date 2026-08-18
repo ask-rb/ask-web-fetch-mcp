@@ -71,4 +71,13 @@ class ServerTest < Minitest::Test
 
     assert_match(/Tool not found/, text)
   end
+
+  def test_unknown_parameter_returns_a_clear_schema_error
+    spawn_client
+    result = @client.call_tool('ask_web_fetch', { url: 'https://example.com', prompt: 'what is this' })
+    text = result.is_a?(Array) ? result.first[:text] : result.dig(:content, 0, :text)
+
+    assert_match(/unknown parameter\(s\): prompt/, text)
+    assert_match(/expects: url, max_chars/, text)
+  end
 end

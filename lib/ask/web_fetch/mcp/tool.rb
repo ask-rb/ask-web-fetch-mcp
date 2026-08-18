@@ -37,6 +37,12 @@ module Ask
         # so it never retries the unretryable; transient failures raise
         # the base Error.
         def call(args)
+          extra = args.keys.map(&:to_s) - params_schema['properties'].keys
+          unless extra.empty?
+            raise ArgumentError,
+              "unknown parameter(s): #{extra.join(', ')} — ask_web_fetch expects: #{params_schema['properties'].keys.join(', ')}"
+          end
+
           url = args['url'].to_s
           raise ArgumentError, 'missing required parameter: url' if url.empty?
 
