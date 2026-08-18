@@ -77,7 +77,7 @@ class ServerTest < Minitest::Test
     result = @client.call_tool('ask_web_fetch', { url: 'https://example.com', prompt: 'what is this' })
     text = result.is_a?(Array) ? result.first[:text] : result.dig(:content, 0, :text)
 
-    assert_match(/unknown parameter\(s\): prompt/, text)
-    assert_match(/expects: url, max_chars/, text)
+    assert_match(/Unknown parameter\(s\) prompt/, text)
+    assert_match(/Expected: url, max_chars/, text)
   end
 end
