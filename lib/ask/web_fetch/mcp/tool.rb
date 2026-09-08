@@ -32,10 +32,9 @@ module Ask
         end
 
         # Returns the fetched markdown (a String is a success for the
-        # adapter) or raises. The terminal verdicts — ParkedDomainError,
-        # EmptyContentError, FetchError — reach the client as their class,
-        # so it never retries the unretryable; transient failures raise
-        # the base Error.
+        # adapter). On failure, returns a formatted error string with the
+        # error class, message, and hint — so the agent gets our gem's
+        # diagnostics instead of ZCode's generic timeout.
         def call(args)
           extra = args.keys.map(&:to_s) - params_schema['properties'].keys
           unless extra.empty?
@@ -48,6 +47,16 @@ module Ask
 
           max_chars = args['max_chars']
           Ask::WebFetch.fetch(url, max_chars: max_chars || Ask::WebFetch::DEFAULT_MAX_CHARS)
+        rescue Ask::WebFetch::Error => e
+          format_error(e)
+        end
+
+        private
+
+        def format_error(e)
+          parts = ["Error: #{e.class.name.split('::').last}: #{e.message}"]
+          parts << "Hint: #{e.hint}" if e.respond_to?(:hint) && e.hint
+          parts.join("\n")
         end
       end
     end

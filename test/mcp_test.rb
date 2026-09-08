@@ -78,11 +78,11 @@ describe Ask::WebFetch::MCP do
       end
       stub_request(:get, 'https://r.jina.ai/https://example.com').to_return(status: 404, body: 'nope')
 
-      error = assert_raises(Ask::WebFetch::ParkedDomainError) do
-        Ask::WebFetch::MCP.tool.call('url' => 'https://example.com')
-      end
+      result = Ask::WebFetch::MCP.tool.call('url' => 'https://example.com')
 
-      _(error.message).must_match(/parked domain/)
+      _(result).must_be_kind_of String
+      _(result).must_include 'ParkedDomainError'
+      _(result).must_include 'parked domain'
     end
   end
 end

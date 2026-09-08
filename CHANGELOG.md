@@ -1,3 +1,13 @@
+## [0.7.0] — 2026-09-09
+
+### Changed
+
+- **Errors are returned as formatted strings, not raised.** The MCP tool
+  now catches `Ask::WebFetch::Error` and returns a formatted error string
+  with class, message, and hint — so the agent gets our gem's diagnostics
+  instead of ZCode's generic "Request timed out" when the fetch takes
+  longer than the transport timeout.
+
 ## [0.6.8] — 2026-09-09
 
 ### Changed

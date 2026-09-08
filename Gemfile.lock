@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    ask-web-fetch-mcp (0.6.7)
+    ask-web-fetch-mcp (0.6.9)
       ask-mcp (>= 0.4.6)
-      ask-web-fetch (>= 0.7.5)
+      ask-web-fetch (>= 0.7.6)
 
 GEM
   remote: https://rubygems.org/
@@ -14,7 +14,7 @@ GEM
       base64
       httpx (~> 1.4)
       json-schema (~> 5.0)
-    ask-web-fetch (0.7.5)
+    ask-web-fetch (0.7.6)
       ferrum (>= 0.14)
       httpx (>= 1.0)
       nokogiri (>= 1.15)
@@ -87,8 +87,8 @@ DEPENDENCIES
 CHECKSUMS
   addressable (2.9.0) sha256=7fdf6ac3660f7f4e867a0838be3f6cf722ace541dd97767fa42bc6cfa980c7af
   ask-mcp (0.4.6) sha256=0b101a6bc052006e478fdc4c29a71474865481f25eba524c6894986ab8254a6a
-  ask-web-fetch (0.7.5) sha256=ef375a7781928a5a517cbadcffc8f28305a7ffe7ebd6e43a4504cfcdf4bcaf26
-  ask-web-fetch-mcp (0.6.7)
+  ask-web-fetch (0.7.6)
+  ask-web-fetch-mcp (0.6.9)
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
   bigdecimal (4.1.2) sha256=53d217666027eab4280346fba98e7d5b66baaae1b9c3c1c0ffe89d48188a3fbd
   bundler (4.0.12) sha256=7f8b757d28dfb636e7b24fba2344ac6dd13b5b24f4b46d62573d483f211825ac
