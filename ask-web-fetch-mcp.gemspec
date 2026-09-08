@@ -47,7 +47,11 @@ Gem::Specification.new do |spec|
   # network-idle wait). This server owns the ask_web_fetch tool shell
   # (duck-typed for the MCP adapter); the library's native Ask::Tools
   # tool, when wanted, is an optional integration in ask-web-fetch itself.
-  spec.add_dependency 'ask-web-fetch', '>= 0.7.1'
+  # 0.7.3: agent-native content negotiation (Accept: text/markdown probe
+  # + .md URL twin fallback before HTML scrape), Turnstile false-positive
+  # challenge fix (cf-chl-widget is not the managed challenge), attached-
+  # browser dead-session recovery.
+  spec.add_dependency 'ask-web-fetch', '>= 0.7.3'
 
   spec.add_development_dependency 'minitest', '~> 5.25'
   spec.add_development_dependency 'rake', '~> 13.0'
