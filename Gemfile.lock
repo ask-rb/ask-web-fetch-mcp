@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    ask-web-fetch-mcp (0.6.2)
+    ask-web-fetch-mcp (0.6.4)
       ask-mcp (>= 0.4.6)
-      ask-web-fetch (>= 0.7.1)
+      ask-web-fetch (>= 0.7.3)
 
 GEM
   remote: https://rubygems.org/
@@ -14,7 +14,7 @@ GEM
       base64
       httpx (~> 1.4)
       json-schema (~> 5.0)
-    ask-web-fetch (0.7.1)
+    ask-web-fetch (0.7.3)
       ferrum (>= 0.14)
       httpx (>= 1.0)
       nokogiri (>= 1.15)
@@ -25,15 +25,14 @@ GEM
     crack (1.0.1)
       bigdecimal
       rexml
-    ferrum (0.17.2)
+    ferrum (0.18.0)
       addressable (~> 2.5)
       base64 (~> 0.2)
       concurrent-ruby (~> 1.1)
-      webrick (~> 1.7)
       websocket-driver (~> 0.7)
     hashdiff (1.2.1)
-    http-2 (1.2.1)
-    httpx (1.8.1)
+    http-2 (1.2.2)
+    httpx (1.8.3)
       http-2 (>= 1.2.0)
     json-schema (5.1.0)
       addressable (~> 2.8)
@@ -64,7 +63,6 @@ GEM
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    webrick (1.9.2)
     websocket-driver (0.8.2)
       base64
       websocket-extensions (>= 0.1.0)
@@ -89,17 +87,17 @@ DEPENDENCIES
 CHECKSUMS
   addressable (2.9.0) sha256=7fdf6ac3660f7f4e867a0838be3f6cf722ace541dd97767fa42bc6cfa980c7af
   ask-mcp (0.4.6) sha256=0b101a6bc052006e478fdc4c29a71474865481f25eba524c6894986ab8254a6a
-  ask-web-fetch (0.7.1) sha256=d6a8e182bbd64f2a05e8b05ebc5ed8c21e97d06e4bd83ac1091a1e9c25b731ca
-  ask-web-fetch-mcp (0.6.2)
+  ask-web-fetch (0.7.3) sha256=9cb8b2e4d411c961e35f9dcbf66d84b0257189d00cb3f612e3cb875c27c56ee6
+  ask-web-fetch-mcp (0.6.4)
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
   bigdecimal (4.1.2) sha256=53d217666027eab4280346fba98e7d5b66baaae1b9c3c1c0ffe89d48188a3fbd
   bundler (4.0.12) sha256=7f8b757d28dfb636e7b24fba2344ac6dd13b5b24f4b46d62573d483f211825ac
   concurrent-ruby (1.3.8) sha256=b2f1be836e968ccc78ccfce277ea79c72a88633f22306782c16ff23fb415d1e1
   crack (1.0.1) sha256=ff4a10390cd31d66440b7524eb1841874db86201d5b70032028553130b6d4c7e
-  ferrum (0.17.2) sha256=2c2540a850b211a46f4d81de21bfd62048f507e4c327d1807225c3823c17e6ee
+  ferrum (0.18.0) sha256=4cb8be16e352fc1d75f087e9214b34ec1b93ba932410c730a4724909ca89d7c6
   hashdiff (1.2.1) sha256=9c079dbc513dfc8833ab59c0c2d8f230fa28499cc5efb4b8dd276cf931457cd1
-  http-2 (1.2.1) sha256=d290f3b7daa70b8be8cd2260306c01243c73ec4df9d598feadaf0ed26e00b9b7
-  httpx (1.8.1) sha256=8d9e003019b2c1a8f582daac9371ec9da96182c23064e211386eaad70b6e12e5
+  http-2 (1.2.2) sha256=81b5d45f50fd4cd5f8c5d09651184bec9401e3ef169c3eb3e5b003d5614a92b9
+  httpx (1.8.3) sha256=cb88f2285c4ef17164d803a640dc393d28722cba7f282ad0e7f9f926cd02dc47
   json-schema (5.1.0) sha256=c12729e346dce58ecc9be07301f4f247aeba1e3daae208e867278f3d27c64eb7
   minitest (5.27.0) sha256=2d3b17f8a36fe7801c1adcffdbc38233b938eb0b4966e97a6739055a45fa77d5
   nokogiri (1.19.4-aarch64-linux-gnu) sha256=1269fb644a6de405057a53dd5c762b1209b43ca7424f839454d3dbc677c31a8f
@@ -116,7 +114,6 @@ CHECKSUMS
   reverse_markdown (3.0.2) sha256=818ebb92ce39dbb1a291690dd1ec9a6d62530d4725296b17e9c8f668f9a5b8af
   rexml (3.4.4) sha256=19e0a2c3425dfbf2d4fc1189747bdb2f849b6c5e74180401b15734bc97b5d142
   webmock (3.26.2) sha256=774556f2ea6371846cca68c01769b2eac0d134492d21f6d0ab5dd643965a4c90
-  webrick (1.9.2) sha256=beb4a15fc474defed24a3bda4ffd88a490d517c9e4e6118c3edce59e45864131
   websocket-driver (0.8.2) sha256=97c556b019bf3410b4961002ac501621e9322d3f8a7bc02161a09301cc4c4146
   websocket-extensions (0.1.5) sha256=1c6ba63092cda343eb53fc657110c71c754c56484aad42578495227d717a8241
 
