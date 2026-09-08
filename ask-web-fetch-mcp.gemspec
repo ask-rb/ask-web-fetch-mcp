@@ -47,10 +47,10 @@ Gem::Specification.new do |spec|
   # network-idle wait). This server owns the ask_web_fetch tool shell
   # (duck-typed for the MCP adapter); the library's native Ask::Tools
   # tool, when wanted, is an optional integration in ask-web-fetch itself.
-  # 0.7.5: structured error classes (NotFoundError with status), HTTP
-  # status codes on all errors, 404 pages with content served instead
-  # of rejected, agent-native content negotiation, Turnstile fix.
-  spec.add_dependency 'ask-web-fetch', '>= 0.7.5'
+  # 0.7.6: error hints for agent-friendly diagnostics, structured error
+  # classes with HTTP status, 404 content extraction, agent-native
+  # content negotiation, Turnstile fix.
+  spec.add_dependency 'ask-web-fetch', '>= 0.7.6'
 
   spec.add_development_dependency 'minitest', '~> 5.25'
   spec.add_development_dependency 'rake', '~> 13.0'

@@ -1,10 +1,10 @@
-## [0.6.7] — 2026-09-09
+## [0.6.8] — 2026-09-09
 
 ### Changed
 
-- Depends on `ask-web-fetch >= 0.7.5` for structured error classes,
-  HTTP status codes on errors, 404 content extraction, agent-native
-  content negotiation, and Turnstile false-positive fix.
+- Depends on `ask-web-fetch >= 0.7.6` for error hints, structured error
+  classes with HTTP status, 404 content extraction, agent-native content
+  negotiation, and Turnstile false-positive fix.
 
 ## [0.6.0] — 2026-08-12
 
