@@ -50,7 +50,7 @@ Gem::Specification.new do |spec|
   # 0.7.6: error hints for agent-friendly diagnostics, structured error
   # classes with HTTP status, 404 content extraction, agent-native
   # content negotiation, Turnstile fix.
-  spec.add_dependency 'ask-web-fetch', '>= 0.7.7'
+  spec.add_dependency 'ask-web-fetch', '>= 0.8.0'
 
   spec.add_development_dependency 'minitest', '~> 5.25'
   spec.add_development_dependency 'rake', '~> 13.0'
